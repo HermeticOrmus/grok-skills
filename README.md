@@ -20,7 +20,7 @@
 
 > The Hermetic / Ormus layer on Grok. Direct tools for serious work, session continuity, publishing, and building your own capabilities.
 
-Companion to [grok-code-skills](https://github.com/HermeticOrmus/grok-code-skills) and the [claude-exorcist](https://github.com/HermeticOrmus/claude-exorcist) (the on-ramp when leaving Claude-built projects and habits).
+Companion to [grok-build-skills](https://github.com/HermeticOrmus/grok-build-skills) and the [claude-exorcist](https://github.com/HermeticOrmus/claude-exorcist) (the on-ramp when leaving Claude-built projects and habits).
 
 ## Key Skills
 

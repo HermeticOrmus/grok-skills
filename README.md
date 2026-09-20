@@ -5,7 +5,7 @@
 <h1 align="center">Grok Skills</h1>
 
 <p align="center">
-  <em>Grok versions of HermeticOrmus Claude Code skills — adapted for Grok's truth-seeking, tool-using, maximally helpful style. Gold Hat, Vibe Engineer, Reality OS discipline.</em>
+  <em>Grok versions of HermeticOrmus skills — adapted for Grok Build's truth-seeking, tool-using, maximally helpful style. Gold Hat, Vibe Engineer, Reality OS discipline.</em>
 </p>
 
 <p align="center">
@@ -18,69 +18,139 @@
 
 ---
 
-> The Hermetic / Ormus layer on Grok. Direct tools for serious work, session continuity, publishing, and building your own capabilities.
+> Operating skills for Grok Build. Direct tools, session continuity pointers, and the Gold Hat filter. No invented virality.
 
-Companion to [grok-build-skills](https://github.com/HermeticOrmus/grok-build-skills) and the [claude-exorcist](https://github.com/HermeticOrmus/claude-exorcist) (the on-ramp when leaving Claude-built projects and habits).
+Companion collections: [grok-build-skills](https://github.com/HermeticOrmus/grok-build-skills) (broader Grok-native pack) and [claude-exorcist](https://github.com/HermeticOrmus/claude-exorcist) (on-ramp when leaving Claude-built projects).
 
-## Key Skills
+## Quick Start
 
-These are the graduated or Hermetic-specific ones, adapted or written for Grok.
+Grok Build discovers skills from these locations ([xAI docs](https://docs.x.ai/build/features/skills-plugins-marketplaces)):
 
-- **Session lifecycle** (critical for switching models/machines without losing state):
-  - ormus-handoff / ormus-pickup / ormus-absorb / ormus-explore (see their public repos)
-- **Meta & creation**:
-  - prime (highest leverage router)
-  - distill (turn experience into permanent tools)
-  - create-skill (build new Grok skills interactively)
-  - meta-build (orchestrated complex work)
-- **Ops & publishing**:
-  - ship (full GitHub + deploy + notify pipeline)
-  - pull / push (WhatsApp-first updates)
-  - contribute (upstream open source as HermeticOrmus)
-- **Specialized**:
-  - claude-exorcist (in grok-code-skills too; the residue remover)
-  - calcinate (bloat burn)
-  - And the full set from ~/.grok/skills/ (raven-*, mars, best-of-n, check-work, etc.)
+- `~/.grok/skills/<name>/SKILL.md` — user-global (`$GROK_HOME` if set)
+- `./.grok/skills/<name>/SKILL.md` — this repo, walked up to the git root
+- Extra directories listed under `[skills].paths` in `~/.grok/config.toml`
 
-Full list evolves in the collection and local `~/.grok/skills/`.
+Each skill is a **directory that contains `SKILL.md`**. A clone parked at `~/.grok/skills/grok-skills` is **not** enough by itself — Grok will not see nested `skills/*/SKILL.md` unless you add that folder to `[skills].paths`.
 
-## Install
+### 1. User-global (usual)
+
+```bash
+git clone https://github.com/HermeticOrmus/grok-skills ~/src/grok-skills
+cd ~/src/grok-skills
+chmod +x install.sh
+./install.sh
+```
+
+`install.sh` symlinks each `skills/<name>` to `~/.grok/skills/<name>`. Pull later and the links stay current.
+
+Manual equivalent:
+
+```bash
+mkdir -p ~/.grok/skills
+ln -sfn "$PWD/skills/gold-hat"            ~/.grok/skills/gold-hat
+ln -sfn "$PWD/skills/commit-standard"     ~/.grok/skills/commit-standard
+ln -sfn "$PWD/skills/liquid-gold-teach"   ~/.grok/skills/liquid-gold-teach
+```
+
+Copy instead of symlink if you want a snapshot:
+
+```bash
+mkdir -p ~/.grok/skills
+cp -R skills/* ~/.grok/skills/
+```
+
+### 2. Keep the checkout, add a discovery path
 
 ```bash
 git clone https://github.com/HermeticOrmus/grok-skills ~/.grok/skills/grok-skills
-# or individual
-git clone https://github.com/HermeticOrmus/ormus-handoff ~/.grok/skills/handoff
 ```
 
-Then use in Grok sessions.
+Then in `~/.grok/config.toml`:
 
-See each repo's README for details (many have their own ormus- public home for richer docs).
+```toml
+[skills]
+paths = ["/home/YOU/.grok/skills/grok-skills/skills"]
+```
 
-## Migration Note (Claude → Grok)
+Replace `YOU` with your home path. Without that line, the nested clone stays invisible.
 
-- Use **claude-exorcist** first on your projects and old skills.
-- The session tools (handoff family) transfer directly — your continuity doesn't have to reset.
-- These skills are written or adapted for Grok's strengths: aggressive tool use, direct language, less need for hand-holding.
-- Project rules live in `.grok/AGENTS.md` (or project-local) — see `~/.grok/docs/user-guide/12-project-rules.md`.
+### 3. Project-local
 
-## Structure & Philosophy
+```bash
+cd /path/to/your-project
+mkdir -p .grok/skills
+cp -R /path/to/grok-skills/skills/* .grok/skills/
+```
 
-Same extraction process as claude-code-skills, but filtered through:
+### Confirm
+
+Start a **new** Grok Build session (or wait for skill reload) and run `/skills`. You should see `gold-hat`, `commit-standard`, and `liquid-gold-teach`. Invoke with `/gold-hat`, `/commit-standard`, or `/liquid-gold-teach`.
+
+Doctrine first: copy [grok-build-reality-os](https://github.com/HermeticOrmus/grok-build-reality-os) `AGENTS.md` to `~/.grok/AGENTS.md` (or `.grok/AGENTS.md` in a project) so sessions load Gold Hat + Liquid Gold before any skill fires.
+
+## Skills in this repo
+
+These three are the highest-leverage operating layer. They are not stubs.
+
+| Skill | Job | Invoke |
+|-------|-----|--------|
+| [gold-hat](./skills/gold-hat/SKILL.md) | Empower-or-extract filter. Ship / Change / Refuse | `/gold-hat` |
+| [commit-standard](./skills/commit-standard/SKILL.md) | Ormus Commit Standard v1.0, Grok-adapted (no Claude/Grok AI footers) | `/commit-standard` |
+| [liquid-gold-teach](./skills/liquid-gold-teach/SKILL.md) | Teach while helping. Name the pattern so the user can repeat it | `/liquid-gold-teach` |
+
+Full OCS examples and the commit-msg hook live in [commit-standard-skills](https://github.com/HermeticOrmus/commit-standard-skills). The manifesto lives in [gold-hat-manifesto](https://github.com/HermeticOrmus/gold-hat-manifesto).
+
+## Suite (doctrine, UI, decisions)
+
+Install these beside this collection. They are sibling repos, not files in this tree.
+
+| Repo | Role |
+|------|------|
+| [grok-build-reality-os](https://github.com/HermeticOrmus/grok-build-reality-os) | Reality OS — `AGENTS.md`, Gold Hat, 22-chapter Grok Build user guide |
+| [LibreUIUX-Grok-Build](https://github.com/HermeticOrmus/LibreUIUX-Grok-Build) | UI/UX skills melted for Grok Build |
+| [ormus-jev](https://github.com/HermeticOrmus/ormus-jev) | TypeSafe Jev teaching pack for Grok Bot (decision gate, claim verify, context screen) |
+| [grok-build-skills](https://github.com/HermeticOrmus/grok-build-skills) | Broader Grok-native pack (prime, distill, create-skill, ship, check-work, …) |
+| [claude-to-grok](https://github.com/HermeticOrmus/claude-to-grok) | Migration hub |
+| [claude-exorcist](https://github.com/HermeticOrmus/claude-exorcist) | Remove Claude residue before you adopt Grok-native tools |
+
+Session continuity (handoff / pickup / absorb / explore) lives in the `ormus-*` public repos and in [LibreSessionFlow-Grok-Build](https://github.com/HermeticOrmus/LibreSessionFlow-Grok-Build). Clone those into `~/.grok/skills/<name>/` the same way — one skill directory per discovery entry.
+
+## Migration note (Claude → Grok)
+
+- Run **claude-exorcist** on old projects and old skills first
+- Session tools transfer; continuity does not have to reset
+- These skills are written for Grok: aggressive tool use, direct language, no theater
+- Project rules: `.grok/AGENTS.md` — see Reality OS `user-guide/12-project-rules.md`
+
+## Structure
+
+```
+grok-skills/
+  README.md
+  install.sh                 # symlink skills/* → ~/.grok/skills/
+  GOLD_HAT.md
+  skills/
+    gold-hat/SKILL.md
+    commit-standard/SKILL.md
+    liquid-gold-teach/SKILL.md
+```
+
+## Philosophy
+
+Same extraction process as the Claude collections, filtered through:
 
 - Gold Hat ("empower or extract?")
-- Vibe Engineer discipline (hypothesis first, scoped, validate, reject working-but-wrong)
-- Karpathy coding rules (think before, simplicity, surgical, verifiable goals)
+- Vibe Engineer (hypothesis first, scoped, validate, reject working-but-wrong)
+- Karpathy rules (think before, simplicity, surgical, verifiable goals)
 - The 7 Hermetic Principles as operative directives
 - Grok voice: no preamble, no disclaimers, high signal, truth over comfort
 
 ## Contributing
 
-Real work only. Adapt or create for Grok's model. Keep the directness — if it feels like it could have come from a heavily RLHF'd model, it doesn't ship here.
+Real work only. Adapt or create for Grok Build. Keep the directness.
 
-See CONTRIBUTING in sibling repos or open a PR.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Update the catalog table in this README when you add a skill.
 
 ## License
 
-MIT © 2026 Diego Bodart — see LICENSE. Built under the Gold Hat principle.
-
-Part of making the move from Claude to Grok clean, continuous, and more powerful.
+MIT © 2026 Diego Bodart — see [LICENSE](LICENSE). Built under the [Gold Hat principle](https://github.com/HermeticOrmus/gold-hat-manifesto).

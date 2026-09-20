@@ -1,32 +1,39 @@
-# Contributing to Claude Code Skills
+# Contributing to Grok Skills
 
-Thank you for your interest in contributing. This collection grows through real work, not theoretical exercises.
+This collection grows through real Grok Build work, not theoretical exercises.
 
 ## What Makes a Good Skill
 
 A skill must:
 
-1. **Emerge from real work** -- It was extracted from an actual development session, not invented for the repo
-2. **Be self-contained** -- A reader should be able to apply it without external context
-3. **Include an Origin section** -- Document the session that produced it
-4. **Follow Gold Hat** -- Empower users, never extract from them
+1. **Emerge from real work** — extracted from an actual session, not invented for the repo
+2. **Be self-contained** — a reader can apply it without external context
+3. **Include an Origin section** — document the session or source repo that produced it
+4. **Follow Gold Hat** — empower users, never extract from them
+5. **Stay honest** — no invented virality, star-count theater, or unverified multipliers
 
 ## Structure
 
 Each skill is a directory containing at minimum a `SKILL.md`:
 
 ```
-your-skill-name/
-  SKILL.md             # Required: the skill
+skills/your-skill-name/
+  SKILL.md             # Required
   references/          # Optional: supporting files, templates, examples
 ```
+
+Grok discovers `~/.grok/skills/<name>/SKILL.md` or `./.grok/skills/<name>/SKILL.md`. Do not nest a skill inside another skill directory.
 
 ## SKILL.md Format
 
 ```markdown
 ---
 name: your-skill-name
-description: "One-line description. Trigger phrases: 'when to use this'."
+description: "What it does. Trigger phrases so Grok auto-invokes it."
+when-to-use: optional extra trigger phrases
+metadata:
+  author: HermeticOrmus
+  short-description: short UI label
 ---
 
 # Skill Name
@@ -46,16 +53,18 @@ description: "One-line description. Trigger phrases: 'when to use this'."
 [Common mistakes to avoid]
 
 ## Origin
-[What session produced this, when, what was the context]
+[What session or source produced this]
 ```
+
+`description` controls auto-invocation. Put the trigger words there.
 
 ## Submitting
 
 1. Fork the repo
 2. Create a branch: `skill/your-skill-name`
-3. Add your skill directory
-4. Update the Catalog table in README.md
-5. Submit a PR
+3. Add the skill under `skills/`
+4. Update the catalog table in README.md
+5. Submit a PR against `main`
 
 ## Code of Conduct
 
